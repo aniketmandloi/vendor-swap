@@ -114,22 +114,28 @@ function ComplianceNote({ line }: { line: VendorLine }) {
 function LineItem({ line }: { line: VendorLine }) {
   return (
     <li className="border-t border-foreground/15 py-3">
-      <h3 className="flex flex-wrap items-baseline gap-x-2 font-semibold">
-        {line.vendor}
-        <span className={`text-sm font-normal ${muted}`}>
-          {FUNCTION_LABELS[line.function]}
-        </span>
-      </h3>
-      <dl className="mt-1 grid gap-x-4 gap-y-0.5 text-sm sm:grid-cols-[11rem_1fr]">
-        <Row term="Current annual cost">
-          <span className="tabular-nums">{money(annualCost(line))}</span>
-        </Row>
-        <VerdictRows verdict={line.verdict} />
-        <Row term="Net first-year savings">
-          <span className="tabular-nums">
-            {money(netFirstYearSavings(line))}
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+        <h3 className="flex flex-wrap items-baseline gap-x-2 font-semibold">
+          {line.vendor}
+          <span className={`text-sm font-normal ${muted}`}>
+            {FUNCTION_LABELS[line.function]}
           </span>
-        </Row>
+        </h3>
+        <dl className="flex flex-wrap gap-x-4 text-sm">
+          <div className="flex gap-2">
+            <dt className={muted}>Current annual cost</dt>
+            <dd className="tabular-nums">{money(annualCost(line))}</dd>
+          </div>
+          <div className="flex gap-2">
+            <dt className={muted}>Net first-year savings</dt>
+            <dd className="font-medium tabular-nums">
+              {money(netFirstYearSavings(line))}
+            </dd>
+          </div>
+        </dl>
+      </div>
+      <dl className="mt-1 grid gap-x-4 gap-y-0.5 text-sm sm:grid-cols-[7rem_1fr]">
+        <VerdictRows verdict={line.verdict} />
         <Row term="Compliance">
           <ComplianceNote line={line} />
         </Row>
