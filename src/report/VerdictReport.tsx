@@ -113,7 +113,7 @@ function ComplianceNote({ line }: { line: VendorLine }) {
 
 function LineItem({ line }: { line: VendorLine }) {
   return (
-    <li className="border-t border-foreground/15 py-3">
+    <li className="break-inside-avoid border-t border-foreground/15 py-3 print:py-1.5">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4">
         <h3 className="flex flex-wrap items-baseline gap-x-2 font-semibold">
           {line.vendor}
@@ -147,8 +147,8 @@ function LineItem({ line }: { line: VendorLine }) {
 export function VerdictReport({ report }: { report: StackVerdictReport }) {
   const totals = reportTotals(report);
   return (
-    <article className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-8">
-      <header className="border-b border-foreground/15 pb-4">
+    <article className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-8 print:max-w-none print:p-0">
+      <header className="border-b border-foreground/15 pb-4 print:pb-2">
         <h1 className="text-2xl font-semibold tracking-tight">
           Stack Verdict Report
         </h1>
@@ -167,7 +167,7 @@ export function VerdictReport({ report }: { report: StackVerdictReport }) {
         const lines = report.lines.filter((line) => line.verdict.kind === kind);
         if (lines.length === 0) return null;
         return (
-          <section key={kind} className="mt-6">
+          <section key={kind} className="mt-6 print:mt-3">
             <h2 className="text-lg font-semibold">{title}</h2>
             <TotalsList totals={totals.byBucket[kind]} />
             <ul className="mt-2">
