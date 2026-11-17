@@ -50,3 +50,14 @@ Do not start the dev server. The owner starts it and checks pages by hand. When 
 5. Wait for CI to pass. Then merge with a merge commit (`gh pr merge --merge`), not a squash, so the atomic commits stay on `main`.
 6. Keep the branch, locally and on GitHub. Remove the worktree only after `git status` shows it is clean. Pull `main`.
 7. Confirm the issue closed. If it did not, close it with a comment that links the PR.
+
+## Model preference
+
+Pick the subagent model by the kind of work. This keeps cost low without lowering quality where judgment matters.
+
+| Work | Model |
+| --- | --- |
+| Mechanical work, for example scaffolding, CLI and `gh` runs, bulk file edits, searches, and running checks | Claude Haiku 5.5 at high effort |
+| Feature and bug-fix code, design, code review, and prose such as docs, PR descriptions, and reports | Claude Opus 5.5 at high effort |
+
+In Claude Code, pass `model: "haiku"` and `effort: "high"` on the Agent call for mechanical work. When a subagent does the work, the parent agent still reviews the diff and reruns the checks before it commits or opens a PR.
