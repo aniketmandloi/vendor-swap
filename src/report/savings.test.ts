@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 import { cents, type Alternative, type Verdict, type VendorLine } from "./model";
-import { annualCost, netFirstYearSavings } from "./savings";
+import { annualCost, netFirstYearSavings, reportTotals } from "./savings";
 
 function line(monthlyCost: number, verdict: Verdict): VendorLine {
   return {
@@ -60,4 +60,30 @@ test("a swap whose setup and training outweigh the cheaper bill loses money", ()
     alternative: alternative(9_000, 30_000, 20_000),
   };
   expect(netFirstYearSavings(line(10_000, verdict))).toBe(-38_000);
+});
+
+test("report totals sum each bucket and the whole stack", () => {
+  const report = {
+    practiceName: "Test Dental",
+    preparedOn: "2026-11-18",
+    lines: [
+      line(45_000, {
+        kind: "replace_now",
+        alternative: alternative(20_000, 50_000, 25_000),
+      }),
+      line(10_000, {
+        kind: "replace_now",
+        alternative: alternative(9_000, 30_000, 20_000),
+      }),
+      line(25_000, keep),
+    ],
+  };
+  expect(reportTotals(report)).toEqual({
+    byBucket: {
+      replace_now: { annualSpend: 660_000, netFirstYearSavings: 187_000 },
+      replace_with_caveats: { annualSpend: 0, netFirstYearSavings: 0 },
+      keep: { annualSpend: 300_000, netFirstYearSavings: 0 },
+    },
+    overall: { annualSpend: 960_000, netFirstYearSavings: 187_000 },
+  });
 });
