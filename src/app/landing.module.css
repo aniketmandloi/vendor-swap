@@ -475,3 +475,47 @@
   from { opacity: 0.4; transform: translateY(2rem) scale(0.96); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .heroCopy h1 {
+    animation: arrive 1s cubic-bezier(.16, 1, .3, 1) both;
+  }
+
+  .stackSheet {
+    animation: deal-sheet 1.3s cubic-bezier(.16, 1, .3, 1) both;
+  }
+
+  .stackRow b {
+    animation: stamp-verdict 550ms cubic-bezier(.17, .9, .32, 1.3) backwards;
+    animation-delay: 800ms;
+  }
+
+  .stackRow:nth-child(3) b { animation-delay: 1150ms; }
+  .stackRow:nth-child(4) b { animation-delay: 1500ms; }
+
+  .page [data-arrived],
+  .casebook details[open] .caseNote {
+    animation: arrive 800ms cubic-bezier(.16, 1, .3, 1) backwards;
+  }
+
+  .steps li:nth-child(2),
+  .pricing li:nth-child(2) { animation-delay: 100ms; }
+
+  .steps li:nth-child(3),
+  .pricing li:nth-child(3) { animation-delay: 200ms; }
+}
+
+@keyframes arrive {
+  from { opacity: 0.2; transform: translateY(2.5rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes deal-sheet {
+  from { opacity: 0; translate: 35% 55%; rotate: 14deg; }
+  to { opacity: 1; translate: 0 0; rotate: 0deg; }
+}
+
+@keyframes stamp-verdict {
+  from { opacity: 0; transform: scale(1.45) rotate(-9deg); }
+  to { opacity: 1; transform: scale(1) rotate(0deg); }
+}

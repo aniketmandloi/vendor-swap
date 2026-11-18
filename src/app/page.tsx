@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { sampleReport } from "../report/sample";
 import { VerdictReport } from "../report/VerdictReport";
+import { MotionPage } from "./MotionPage";
 import { VerdictStack } from "./VerdictStack";
 import styles from "./landing.module.css";
 
@@ -24,7 +25,7 @@ const prices = [
 
 export default function Home() {
   return (
-    <div className={styles.page}>
+    <MotionPage>
       <header className={styles.header}>
         <Link href="/" className={styles.brand}>
           <span className={styles.mark} aria-hidden="true">↔</span>
@@ -47,7 +48,7 @@ export default function Home() {
           <VerdictStack />
         </section>
 
-        <section className={styles.problem}>
+        <section data-reveal className={styles.problem}>
           <h2>Every renewal is a decision.</h2>
           <p>Software renewals can outpace practice revenue. Cutting the wrong tool can disrupt patient flow or expose patient data. It helps to know what each vendor does for your practice before you decide.</p>
         </section>
@@ -56,13 +57,13 @@ export default function Home() {
           <h2>From bills to a decision.</h2>
           <ol className={styles.steps}>
             {steps.map(({ name, detail }) => (
-              <li key={name}><h3>{name}</h3><p>{detail}</p></li>
+              <li data-reveal key={name}><h3>{name}</h3><p>{detail}</p></li>
             ))}
           </ol>
         </section>
 
         <section className={styles.verdicts} aria-labelledby="verdicts">
-          <div className={styles.verdictIntro}>
+          <div data-reveal className={styles.verdictIntro}>
             <h2 id="verdicts">Three possible verdicts.</h2>
             <p>Explore a decision from the sample practice.</p>
           </div>
@@ -87,7 +88,7 @@ export default function Home() {
         </section>
 
         <section className={styles.sample} id="sample">
-          <div className={styles.sampleIntro}>
+          <div data-reveal className={styles.sampleIntro}>
             <div>
               <p className={styles.kicker}>Fictional practice · Sample report</p>
               <h2>See the verdict in practice.</h2>
@@ -113,12 +114,12 @@ export default function Home() {
           <p>Available at launch.</p>
           <ul>
             {prices.map(({ name, price, detail }) => (
-              <li key={name}><h3>{name}</h3><strong>{price}</strong><p>{detail}</p></li>
+              <li data-reveal key={name}><h3>{name}</h3><strong>{price}</strong><p>{detail}</p></li>
             ))}
           </ul>
         </section>
 
-        <section className={styles.signup}>
+        <section data-reveal className={styles.signup}>
           <div>
             <h2>Become a founding practice.</h2>
             <p>Get a free first-pass scan of up to 10 vendors at launch and first pick of paid audit slots.</p>
@@ -134,6 +135,6 @@ export default function Home() {
         </section>
       </main>
       <footer className={styles.footer}><Link href="/">VendorSwap</Link></footer>
-    </div>
+    </MotionPage>
   );
 }
