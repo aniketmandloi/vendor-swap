@@ -5,9 +5,9 @@ import { VerdictStack } from "./VerdictStack";
 import styles from "./landing.module.css";
 
 const verdicts = [
-  { name: "Replace now", detail: "A low-risk switch with a named alternative." },
-  { name: "Replace with caveats", detail: "Run a trial or overlap before cancelling." },
-  { name: "Keep", detail: "Stay with the current vendor when switching costs or risks outweigh the savings." },
+  { kind: "replace_now", name: "Replace now", detail: "A low-risk switch with a named alternative." },
+  { kind: "replace_with_caveats", name: "Replace with caveats", detail: "Run a trial or overlap before cancelling." },
+  { kind: "keep", name: "Keep", detail: "Stay with the current vendor when switching costs or risks outweigh the savings." },
 ];
 
 const steps = [
@@ -62,12 +62,28 @@ export default function Home() {
         </section>
 
         <section className={styles.verdicts} aria-labelledby="verdicts">
-          <h2 id="verdicts">Three possible verdicts.</h2>
-          <ul>
-            {verdicts.map(({ name, detail }) => (
-              <li key={name}><h3>{name}</h3><p>{detail}</p></li>
-            ))}
-          </ul>
+          <div className={styles.verdictIntro}>
+            <h2 id="verdicts">Three possible verdicts.</h2>
+            <p>Explore a decision from the sample practice.</p>
+          </div>
+          <div className={styles.casebook}>
+            {verdicts.map(({ kind, name, detail }) => {
+              const line = sampleReport.lines.find((item) => item.verdict.kind === kind);
+              if (!line) return null;
+              const verdict = line.verdict;
+              return (
+                <details key={kind} name="sample-verdict" open={kind === "replace_now"}>
+                  <summary>{name}</summary>
+                  <div className={styles.caseNote}>
+                    <p>{detail}</p>
+                    <h3>{line.vendor}</h3>
+                    <p>{verdict.kind === "keep" ? verdict.reason : `Switch to ${verdict.alternative.name}.`}</p>
+                    {verdict.kind === "replace_with_caveats" && <p>{verdict.trialPlan}</p>}
+                  </div>
+                </details>
+              );
+            })}
+          </div>
         </section>
 
         <section className={styles.sample} id="sample">

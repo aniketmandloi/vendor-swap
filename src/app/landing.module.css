@@ -235,7 +235,6 @@
 }
 
 .steps,
-.verdicts ul,
 .pricing ul {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -262,7 +261,6 @@
 }
 
 .steps h3,
-.verdicts h3,
 .pricing h3 {
   font-size: 1.125rem;
   font-weight: 650;
@@ -274,13 +272,50 @@
   color: var(--paper);
 }
 
-.verdicts li {
-  border-left: 0.2rem solid #dcebbd;
-  padding: 0.3rem 0 0.3rem 1rem;
+.verdicts {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: clamp(2rem, 8vw, 8rem);
 }
 
-.verdicts li:nth-child(2) { border-color: #f6e6b3; }
-.verdicts li:nth-child(3) { border-color: #dde8e8; }
+.verdictIntro p { margin-top: 1rem; }
+
+.casebook details {
+  border-top: 1px solid #88a192;
+  padding-block: 0.25rem;
+}
+
+.casebook summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  cursor: pointer;
+  font: 400 clamp(1.4rem, 2.8vw, 2.5rem) / 1.15 var(--display);
+  list-style: none;
+}
+
+.casebook summary::-webkit-details-marker { display: none; }
+.casebook summary::after { content: "+"; color: var(--lime); }
+.casebook details[open] summary::after { content: "−"; }
+
+.caseNote {
+  margin-bottom: 1.3rem;
+  padding: 1.25rem;
+  background: var(--paper);
+  color: var(--foreground);
+  border-left: 4px solid var(--lime);
+}
+
+.caseNote h3 {
+  margin: 1rem 0 0.3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-weight: 650;
+}
+
+.caseNote p + p { margin-top: 0.5rem; }
 
 .sample {
   padding-block: clamp(3rem, 8vw, 7rem);
@@ -391,6 +426,7 @@
 @media (max-width: 48rem) {
   .hero,
   .problem,
+  .verdicts,
   .trust,
   .signup {
     grid-template-columns: 1fr;
@@ -409,8 +445,7 @@
   }
 
   .steps,
-  .verdicts ul,
-  .pricing ul {
+    .pricing ul {
     grid-template-columns: 1fr;
     gap: 1.25rem;
   }
