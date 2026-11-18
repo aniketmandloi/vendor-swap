@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { sampleReport } from "../report/sample";
 import { VerdictReport } from "../report/VerdictReport";
+import { VerdictStack } from "./VerdictStack";
 import styles from "./landing.module.css";
 
 const verdicts = [
@@ -43,16 +44,7 @@ export default function Home() {
             <p>A flat-fee audit gives every vendor in your practice a verdict. See what to replace, what to trial, and what to keep.</p>
             <a className={styles.button} href="#sample">See the sample report <span aria-hidden="true">↘</span></a>
           </div>
-          <div className={styles.heroArt} aria-hidden="true">
-            <div className={styles.stackBacking} />
-            <div className={styles.stackSheet}>
-              <span className={styles.kicker}>Stack verdict</span>
-              <div className={styles.stackRow}><span>Patient texting</span><b>Replace now</b></div>
-              <div className={styles.stackRow}><span>Recall and reminders</span><b>Trial first</b></div>
-              <div className={styles.stackRow}><span>Practice management</span><b>Keep</b></div>
-            </div>
-            <div className={styles.stackTab}>Vendor by vendor</div>
-          </div>
+          <VerdictStack />
         </section>
 
         <section className={styles.problem}>

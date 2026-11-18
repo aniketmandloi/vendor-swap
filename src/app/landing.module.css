@@ -423,33 +423,27 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .stackBacking,
-    .stackSheet,
-    .stackTab {
-      animation: sort-sheet linear both;
-      animation-timeline: view();
-      animation-range: exit 0% exit 85%;
-    }
+  .heroArt {
+    animation: place-stack 750ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
 
-    .stackBacking { --start-angle: -9deg; --end-angle: -3deg; --travel: -16px; }
-    .stackSheet { --start-angle: 4deg; --end-angle: 0deg; --travel: 10px; }
-    .stackTab { --start-angle: -6deg; --end-angle: 0deg; --travel: -28px; }
+  .stackBacking {
+    transform: translateY(calc(-64px * var(--stack-progress, 0)))
+      rotate(calc(-9deg - 12deg * var(--stack-progress, 0)));
+  }
 
-    .sample article {
-      animation: settle-report linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 26%;
-    }
+  .stackSheet {
+    transform: translateY(calc(32px * var(--stack-progress, 0)))
+      rotate(calc(4deg - 8deg * var(--stack-progress, 0)));
+  }
+
+  .stackTab {
+    transform: translateY(calc(75px * var(--stack-progress, 0)))
+      rotate(calc(-6deg + 17deg * var(--stack-progress, 0)));
   }
 }
 
-@keyframes sort-sheet {
-  from { transform: rotate(var(--start-angle)); }
-  to { transform: translateY(var(--travel)) rotate(var(--end-angle)); }
-}
-
-@keyframes settle-report {
-  from { transform: translateY(1.75rem); }
-  to { transform: translateY(0); }
+@keyframes place-stack {
+  from { opacity: 0.4; transform: translateY(2rem) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
