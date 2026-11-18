@@ -48,12 +48,11 @@ export function VerdictStack() {
     <div ref={stack} className={styles.heroArt} aria-hidden="true">
       <div className={styles.stackBacking} />
       <div className={styles.stackSheet}>
-        <span className={styles.kicker}>Stack verdict</span>
+        <span className={styles.kicker}>Sample stack verdict</span>
         <div className={styles.stackRow}><span>Patient texting</span><b>Replace now</b></div>
         <div className={styles.stackRow}><span>Recall and reminders</span><b>Trial first</b></div>
         <div className={styles.stackRow}><span>Practice management</span><b>Keep</b></div>
       </div>
-      <div className={styles.stackTab}>Vendor by vendor</div>
     </div>
   );
 }
