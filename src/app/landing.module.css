@@ -3,7 +3,7 @@
   --surface: #e8eddc;
   --surface-2: color-mix(in srgb, var(--rule) 60%, var(--background));
   --ink: var(--forest);
-  --muted: color-mix(in srgb, var(--foreground) 66%, var(--background));
+  --muted: color-mix(in srgb, var(--foreground) 72%, var(--background));
   --accent: var(--lime);
   --accent-strong: #efffc3;
   --accent-ink: var(--forest);
@@ -444,7 +444,7 @@
   font-weight: 500;
   line-height: 1;
   letter-spacing: -0.045em;
-  color: color-mix(in srgb, var(--muted) 70%, var(--background));
+  color: var(--muted);
   text-align: left;
   cursor: pointer;
   transition: color 0.18s ease, transform 0.3s var(--ease-out);
@@ -1124,7 +1124,7 @@
   min-width: 0;
   min-height: 48px;
   padding: 0 0.85rem;
-  border: 1px solid var(--rule);
+  border: 1px solid color-mix(in srgb, var(--foreground) 50%, var(--paper));
   border-radius: var(--radius);
   background: var(--background);
 }
