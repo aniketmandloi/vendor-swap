@@ -6,6 +6,7 @@ import { SignupForm } from "../signup/SignupForm";
 import { HowItWorks } from "./HowItWorks";
 import { MotionPage } from "./MotionPage";
 import { Questions } from "./Questions";
+import { SwapMark } from "./SwapMark";
 import { VerdictExplorer } from "./VerdictExplorer";
 import { VerdictStack } from "./VerdictStack";
 import styles from "./landing.module.css";
@@ -56,7 +57,7 @@ export default function Home() {
     <MotionPage>
       <header className={styles.top}>
         <Link href="/" className={styles.wordmark}>
-          <span className={styles.mark} aria-hidden="true">↔</span>
+          <SwapMark />
           VendorSwap
         </Link>
         <nav aria-label="Main navigation" className={styles.nav}>

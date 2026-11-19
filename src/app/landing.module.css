@@ -236,7 +236,6 @@
   border-radius: 0.4rem;
   background: var(--ink);
   color: var(--accent);
-  font-weight: 400;
   transition: transform 0.5s var(--ease-expo);
 }
 

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { contactEmail } from "../../contact";
+import { SwapMark } from "../SwapMark";
 import styles from "../landing.module.css";
 
 export const metadata: Metadata = {
@@ -14,7 +15,7 @@ export default function PrivacyPage() {
     <div className={styles.page}>
       <nav aria-label="Privacy navigation" className="mx-auto flex w-full max-w-3xl flex-wrap items-center justify-between gap-3 px-4 py-6 text-sm sm:px-6">
         <Link href="/" className={styles.wordmark}>
-          <span className={styles.mark} aria-hidden="true">↔</span>
+          <SwapMark />
           VendorSwap
         </Link>
         <Link href="/" className="underline underline-offset-4">
