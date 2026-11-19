@@ -23,10 +23,10 @@ export default function PrivacyPage() {
       </nav>
 
       <main className="mx-auto w-full max-w-3xl px-4 pt-10 pb-24 sm:px-6">
-        <p className={styles.eyebrow}>
+        <h1 className={styles.head}>Privacy</h1>
+        <p className={styles.headNote}>
           Last updated <time dateTime="2026-11-19">November 19, 2026</time>
         </p>
-        <h1 className={styles.head}>Privacy</h1>
         <p className={`${styles.lead} mt-6`}>
           This page covers the founding-list form on this site. It says what we collect, why, where we keep it, and how to have it deleted.
         </p>

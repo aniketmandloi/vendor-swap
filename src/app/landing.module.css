@@ -98,7 +98,11 @@
   max-width: 34ch;
 }
 
-.eyebrow,
+.headNote {
+  margin-top: 1rem;
+  color: var(--muted);
+}
+
 .caseMeta {
   margin-bottom: 1rem;
   font-family: var(--font-geist-mono), monospace;
@@ -251,7 +255,7 @@
 /* Hero */
 
 .hero {
-  padding-top: clamp(44px, 6vh, 72px);
+  padding-top: clamp(56px, 9vh, 104px);
 }
 
 .heroText {
@@ -840,8 +844,11 @@
   grid-column: 1 / -1;
   display: grid;
   justify-items: start;
-  gap: 1.25rem;
   margin-bottom: 2.5rem;
+}
+
+.sampleIntro .linkArrow {
+  margin-top: 1.25rem;
 }
 
 .sampleSheet {
