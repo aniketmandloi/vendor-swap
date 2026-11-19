@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { sampleReport } from "../report/sample";
 import { VerdictReport } from "../report/VerdictReport";
+import { SignupForm } from "../signup/SignupForm";
 import { HowItWorks } from "./HowItWorks";
 import { MotionPage } from "./MotionPage";
 import { Questions } from "./Questions";
@@ -219,14 +220,9 @@ export default function Home() {
             <h2 id="signup-title" data-reveal className={styles.ctaLine}>Become a founding practice.</h2>
             <p data-reveal style={delay(0.1)}>Get a free first-pass scan of up to 10 vendors at launch and first pick of paid audit slots.</p>
           </div>
-          <form data-reveal style={delay(0.18)} className={styles.ctaDialog} aria-describedby="signup-status">
-            <label htmlFor="practice-email">Practice email</label>
-            <div className={styles.signupFields}>
-              <input id="practice-email" type="email" autoComplete="email" disabled />
-              <button type="submit" className={styles.button} disabled>Join the list</button>
-            </div>
-            <p id="signup-status">Signups aren’t open yet.</p>
-          </form>
+          <div data-reveal style={delay(0.18)} className={styles.ctaDialog}>
+            <SignupForm />
+          </div>
         </section>
       </main>
 

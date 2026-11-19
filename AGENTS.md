@@ -21,6 +21,7 @@ VendorSwap gives solo dental practices a neutral verdict on every vendor in thei
 | `npm run typecheck` | Generates Next route types, then runs `tsc --noEmit`. Plain `tsc` fails on a fresh checkout. |
 | `npm test` | Runs Vitest once. |
 | `npm run build` | Builds the production app. |
+| `npm run db:schema` | Applies `db/schema.sql` to the database in `DATABASE_URL`, read from the environment or `.env.local`. Safe to rerun. |
 
 CI (`.github/workflows/ci.yml`) runs lint, typecheck, and test on every push and pull request. Run all three, plus `npm run build`, before you open a PR.
 

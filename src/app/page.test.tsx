@@ -11,3 +11,12 @@ test("home page shows the audit pitch and links to the embedded sample report", 
   expect(html).toContain('id="sample"');
   expect(html).toContain("Cedar Hollow Family Dentistry");
 });
+
+test("home page signup section takes founding-practice signups", () => {
+  const html = renderToStaticMarkup(<Home />);
+  const signup = html.slice(html.indexOf('id="signup"'));
+
+  expect(signup).toContain('name="email"');
+  expect(signup).toContain('name="role"');
+  expect(signup).not.toContain("disabled");
+});
