@@ -1308,8 +1308,8 @@
   .stageName { min-height: 44px; }
 
   .compareHead { margin-bottom: 28px; }
-  .compareHeader { display: none; }
   .compareRow { display: block; padding: 16px 0; }
+  .compareRow.compareHeader { display: none; }
   .compareRow::before { position: absolute; inset: 0 calc(-1 * var(--margin)); z-index: 0; background: var(--bg); content: ""; }
   .compareRow:nth-child(even)::before { background: var(--surface); }
   .compareName { padding: 0 0 10px; }
