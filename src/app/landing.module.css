@@ -3,7 +3,7 @@
   --surface: #e8eddc;
   --surface-2: color-mix(in srgb, var(--rule) 60%, var(--background));
   --ink: var(--forest);
-  --muted: color-mix(in srgb, var(--foreground) 66%, var(--background));
+  --muted: color-mix(in srgb, var(--foreground) 72%, var(--background));
   --accent: var(--lime);
   --accent-strong: #efffc3;
   --accent-ink: var(--forest);
@@ -98,7 +98,11 @@
   max-width: 34ch;
 }
 
-.eyebrow,
+.headNote {
+  margin-top: 1rem;
+  color: var(--muted);
+}
+
 .caseMeta {
   margin-bottom: 1rem;
   font-family: var(--font-geist-mono), monospace;
@@ -232,7 +236,6 @@
   border-radius: 0.4rem;
   background: var(--ink);
   color: var(--accent);
-  font-weight: 400;
   transition: transform 0.5s var(--ease-expo);
 }
 
@@ -251,7 +254,7 @@
 /* Hero */
 
 .hero {
-  padding-top: clamp(44px, 6vh, 72px);
+  padding-top: clamp(56px, 9vh, 104px);
 }
 
 .heroText {
@@ -353,8 +356,9 @@
 
 .sheetBar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.25rem 1rem;
   padding-bottom: 0.75rem;
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.68rem;
@@ -444,7 +448,7 @@
   font-weight: 500;
   line-height: 1;
   letter-spacing: -0.045em;
-  color: color-mix(in srgb, var(--muted) 70%, var(--background));
+  color: var(--muted);
   text-align: left;
   cursor: pointer;
   transition: color 0.18s ease, transform 0.3s var(--ease-out);
@@ -550,7 +554,7 @@
 }
 
 .clause {
-  max-width: 11ch;
+  max-width: 14ch;
   font-size: var(--step-head);
   font-weight: 500;
   line-height: 1;
@@ -840,8 +844,11 @@
   grid-column: 1 / -1;
   display: grid;
   justify-items: start;
-  gap: 1.25rem;
   margin-bottom: 2.5rem;
+}
+
+.sampleIntro .linkArrow {
+  margin-top: 1.25rem;
 }
 
 .sampleSheet {
@@ -942,6 +949,12 @@
   letter-spacing: -0.05em;
   font-variant-numeric: tabular-nums;
   color: var(--ink);
+}
+
+.planFrom {
+  font-size: var(--step-body);
+  font-weight: 500;
+  letter-spacing: -0.01em;
 }
 
 .planPeriod {
@@ -1124,9 +1137,24 @@
   min-width: 0;
   min-height: 48px;
   padding: 0 0.85rem;
-  border: 1px solid var(--rule);
+  border: 1px solid color-mix(in srgb, var(--foreground) 50%, var(--paper));
   border-radius: var(--radius);
   background: var(--background);
+  color: var(--foreground);
+  caret-color: var(--ink);
+  transition: border-color 0.18s ease;
+}
+
+.signupField select {
+  padding-right: 2.5rem;
+  background: var(--background) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='%2317382c' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 0.85rem center / 16px;
+  appearance: none;
+  cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .signupField input:hover,
+  .signupField select:hover { border-color: var(--ink); }
 }
 
 .signupField [aria-invalid="true"] {
@@ -1308,8 +1336,8 @@
   .stageName { min-height: 44px; }
 
   .compareHead { margin-bottom: 28px; }
-  .compareHeader { display: none; }
   .compareRow { display: block; padding: 16px 0; }
+  .compareRow.compareHeader { display: none; }
   .compareRow::before { position: absolute; inset: 0 calc(-1 * var(--margin)); z-index: 0; background: var(--bg); content: ""; }
   .compareRow:nth-child(even)::before { background: var(--surface); }
   .compareName { padding: 0 0 10px; }
@@ -1338,8 +1366,8 @@
   .ctaDialog { margin-top: 40px; width: 100%; padding: 20px; }
 
   .footer { grid-template-columns: 1fr 1fr; gap: 6px; }
-  .tileWord { grid-column: 1 / -1; min-height: 160px; }
-  .tileWord span { font-size: 18vw; }
+  .tileWord { grid-column: 1 / -1; min-height: 160px; container-type: inline-size; }
+  .tileWord span { font-size: 17cqi; }
   .tileGo { grid-column: 1 / -1; min-height: 160px; }
   .tileStatement,
   .tileNav { grid-column: 1 / -1; min-height: 0; padding: 20px; }

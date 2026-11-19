@@ -160,9 +160,9 @@ export function VerdictReport({
   const BucketTitle = embedded ? "h4" : "h2";
   const totals = reportTotals(report);
   return (
-    <article className="mx-auto w-full max-w-5xl rounded-2xl border border-[var(--rule)] bg-[var(--paper)] px-5 py-7 sm:px-10 sm:py-10 print:max-w-none print:rounded-none print:border-0 print:bg-white print:p-0">
+    <article className="mx-auto w-full max-w-5xl rounded-sm border border-[var(--rule)] bg-[var(--paper)] px-5 py-7 sm:px-10 sm:py-10 print:max-w-none print:rounded-none print:border-0 print:bg-white print:p-0">
       <header className="border-b border-foreground/15 pb-4 print:pb-2">
-        <Title className="font-serif text-3xl tracking-tight sm:text-5xl print:text-2xl print:font-semibold">
+        <Title className="text-3xl font-medium tracking-[-0.04em] text-[var(--forest)] sm:text-5xl print:text-2xl print:font-semibold print:tracking-tight">
           Stack Verdict Report
         </Title>
         <p className="text-lg">{report.practiceName}</p>

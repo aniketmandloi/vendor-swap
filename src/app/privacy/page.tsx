@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { contactEmail } from "../../contact";
+import { SwapMark } from "../SwapMark";
 import styles from "../landing.module.css";
 
 export const metadata: Metadata = {
@@ -14,7 +15,7 @@ export default function PrivacyPage() {
     <div className={styles.page}>
       <nav aria-label="Privacy navigation" className="mx-auto flex w-full max-w-3xl flex-wrap items-center justify-between gap-3 px-4 py-6 text-sm sm:px-6">
         <Link href="/" className={styles.wordmark}>
-          <span className={styles.mark} aria-hidden="true">↔</span>
+          <SwapMark />
           VendorSwap
         </Link>
         <Link href="/" className="underline underline-offset-4">
@@ -23,10 +24,10 @@ export default function PrivacyPage() {
       </nav>
 
       <main className="mx-auto w-full max-w-3xl px-4 pt-10 pb-24 sm:px-6">
-        <p className={styles.eyebrow}>
+        <h1 className={styles.head}>Privacy</h1>
+        <p className={styles.headNote}>
           Last updated <time dateTime="2026-11-19">November 19, 2026</time>
         </p>
-        <h1 className={styles.head}>Privacy</h1>
         <p className={`${styles.lead} mt-6`}>
           This page covers the founding-list form on this site. It says what we collect, why, where we keep it, and how to have it deleted.
         </p>

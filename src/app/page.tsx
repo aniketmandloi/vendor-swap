@@ -6,6 +6,7 @@ import { SignupForm } from "../signup/SignupForm";
 import { HowItWorks } from "./HowItWorks";
 import { MotionPage } from "./MotionPage";
 import { Questions } from "./Questions";
+import { SwapMark } from "./SwapMark";
 import { VerdictExplorer } from "./VerdictExplorer";
 import { VerdictStack } from "./VerdictStack";
 import styles from "./landing.module.css";
@@ -27,7 +28,8 @@ const plans = [
   },
   {
     name: "Install",
-    price: "From $8,000",
+    from: true,
+    price: "$8,000",
     period: "One-time, audit included",
     rows: ["The audit, plus install of approved replacements", "Included", "Front-desk training", "30 days of support"],
   },
@@ -51,12 +53,16 @@ function Arrow() {
   );
 }
 
+function PlanPrice({ from, price }: { from?: boolean; price: string }) {
+  return from ? <><span className={styles.planFrom}>From</span> {price}</> : price;
+}
+
 export default function Home() {
   return (
     <MotionPage>
       <header className={styles.top}>
         <Link href="/" className={styles.wordmark}>
-          <span className={styles.mark} aria-hidden="true">↔</span>
+          <SwapMark />
           VendorSwap
         </Link>
         <nav aria-label="Main navigation" className={styles.nav}>
@@ -70,7 +76,6 @@ export default function Home() {
       <main>
         <section className={`${styles.grid} ${styles.hero}`} aria-labelledby="headline">
           <div className={styles.heroText}>
-            <p className={`${styles.eyebrow} ${styles.load}`} style={delay(0.05)}>For solo dental practices</p>
             <h1 id="headline" className={`${styles.display} ${styles.h1}`}>
               <span className={styles.line}><span style={{ "--i": 0 } as CSSProperties}>Know which dental software</span></span>
               <span className={styles.line}><span style={{ "--i": 1 } as CSSProperties}>you can <em className={styles.highlight}>safely cancel.</em></span></span>
@@ -78,7 +83,7 @@ export default function Home() {
           </div>
           <div className={styles.heroRow}>
             <p className={`${styles.lead} ${styles.heroSentence} ${styles.load}`} style={delay(0.5)}>
-              A flat-fee audit gives every vendor in your practice a verdict. See what to replace, what to trial, and what to keep.
+              A flat-fee audit gives every vendor in your solo practice a verdict. See what to replace, what to trial, and what to keep.
             </p>
             <div className={`${styles.heroActions} ${styles.load}`} style={delay(0.62)}>
               <a className={styles.button} href="#signup">Join the founding list</a>
@@ -99,7 +104,6 @@ export default function Home() {
 
         <section className={`${styles.grid} ${styles.section} ${styles.outputs}`} id="verdicts" aria-labelledby="verdicts-title">
           <div data-reveal className={styles.outputsHead}>
-            <p className={styles.eyebrow}>From the sample practice</p>
             <h2 id="verdicts-title" className={styles.head}>Three possible verdicts.</h2>
           </div>
           <VerdictExplorer />
@@ -108,7 +112,6 @@ export default function Home() {
         <section className={styles.section} id="how-it-works" aria-labelledby="how-title">
           <div className={styles.grid}>
             <div data-reveal className={styles.stagesHead}>
-              <p className={styles.eyebrow}>How it works</p>
               <h2 id="how-title" className={styles.head}>From bills to a decision.</h2>
             </div>
           </div>
@@ -119,7 +122,6 @@ export default function Home() {
 
         <section className={`${styles.grid} ${styles.section}`} aria-labelledby="compare-title">
           <div data-reveal className={styles.compareHead}>
-            <p className={styles.eyebrow}>Why it&apos;s different</p>
             <h2 id="compare-title" className={styles.head}>A verdict, not a sales pitch.</h2>
           </div>
           <div role="table" aria-labelledby="compare-title" className={styles.compare}>
@@ -143,8 +145,8 @@ export default function Home() {
         <section className={`${styles.section} ${styles.sample}`} id="sample" aria-labelledby="sample-title">
           <div className={styles.grid}>
             <div data-reveal className={styles.sampleIntro}>
-              <p className={styles.eyebrow}>Fictional practice · Sample report</p>
               <h2 id="sample-title" className={styles.head}>See the verdict in practice.</h2>
+              <p className={styles.headNote}>{sampleReport.practiceName} is a fictional practice.</p>
               <Link className={`${styles.link} ${styles.linkArrow}`} href="/sample-report">Open print-friendly report <Arrow /></Link>
             </div>
           </div>
@@ -166,17 +168,17 @@ export default function Home() {
 
         <section className={`${styles.grid} ${styles.section}`} id="pricing" aria-labelledby="pricing-title">
           <div data-reveal className={styles.priceHead}>
-            <p className={styles.eyebrow}>Available at launch</p>
             <h2 id="pricing-title" className={styles.head}>Founding-practice pricing.</h2>
+            <p className={styles.headNote}>Available at launch.</p>
           </div>
 
           <div role="table" aria-labelledby="pricing-title" className={styles.pricing} data-reveal>
             <div role="row" className={`${styles.priceRow} ${styles.priceHeadRow}`}>
               <span role="columnheader" className={styles.priceLabel}><span className={styles.srOnly}>Plan</span></span>
-              {plans.map(({ name, price, period }) => (
+              {plans.map(({ name, from, price, period }) => (
                 <span role="columnheader" key={name} className={styles.priceCell}>
                   <span className={styles.planName}>{name}</span>
-                  <span className={styles.planPrice}>{price}</span>
+                  <span className={styles.planPrice}><PlanPrice from={from} price={price} /></span>
                   <span className={styles.planPeriod}>{period}</span>
                 </span>
               ))}
@@ -192,10 +194,10 @@ export default function Home() {
           </div>
 
           <div className={styles.plans}>
-            {plans.map(({ name, price, period, rows }, index) => (
+            {plans.map(({ name, from, price, period, rows }, index) => (
               <article key={name} data-reveal className={styles.plan} data-featured={index === 0}>
                 <h3 className={styles.planName}>{name}</h3>
-                <p className={styles.planPrice}>{price}</p>
+                <p className={styles.planPrice}><PlanPrice from={from} price={price} /></p>
                 <p className={styles.planPeriod}>{period}</p>
                 <dl className={styles.planRows}>
                   {planRows.map((label, row) => (
@@ -209,7 +211,6 @@ export default function Home() {
 
         <section className={`${styles.grid} ${styles.section} ${styles.faq}`} id="questions" aria-labelledby="questions-title">
           <div data-reveal className={styles.faqHead}>
-            <p className={styles.eyebrow}>Questions</p>
             <h2 id="questions-title" className={styles.head}>Before you sign up.</h2>
           </div>
           <Questions />
