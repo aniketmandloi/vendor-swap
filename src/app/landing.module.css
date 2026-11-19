@@ -1338,8 +1338,8 @@
   .ctaDialog { margin-top: 40px; width: 100%; padding: 20px; }
 
   .footer { grid-template-columns: 1fr 1fr; gap: 6px; }
-  .tileWord { grid-column: 1 / -1; min-height: 160px; }
-  .tileWord span { font-size: 18vw; }
+  .tileWord { grid-column: 1 / -1; min-height: 160px; container-type: inline-size; }
+  .tileWord span { font-size: 17cqi; }
   .tileGo { grid-column: 1 / -1; min-height: 160px; }
   .tileStatement,
   .tileNav { grid-column: 1 / -1; min-height: 0; padding: 20px; }
