@@ -28,7 +28,8 @@ const plans = [
   },
   {
     name: "Install",
-    price: "From $8,000",
+    from: true,
+    price: "$8,000",
     period: "One-time, audit included",
     rows: ["The audit, plus install of approved replacements", "Included", "Front-desk training", "30 days of support"],
   },
@@ -50,6 +51,10 @@ function Arrow() {
       <path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.5" />
     </svg>
   );
+}
+
+function PlanPrice({ from, price }: { from?: boolean; price: string }) {
+  return from ? <><span className={styles.planFrom}>From</span> {price}</> : price;
 }
 
 export default function Home() {
@@ -170,10 +175,10 @@ export default function Home() {
           <div role="table" aria-labelledby="pricing-title" className={styles.pricing} data-reveal>
             <div role="row" className={`${styles.priceRow} ${styles.priceHeadRow}`}>
               <span role="columnheader" className={styles.priceLabel}><span className={styles.srOnly}>Plan</span></span>
-              {plans.map(({ name, price, period }) => (
+              {plans.map(({ name, from, price, period }) => (
                 <span role="columnheader" key={name} className={styles.priceCell}>
                   <span className={styles.planName}>{name}</span>
-                  <span className={styles.planPrice}>{price}</span>
+                  <span className={styles.planPrice}><PlanPrice from={from} price={price} /></span>
                   <span className={styles.planPeriod}>{period}</span>
                 </span>
               ))}
@@ -189,10 +194,10 @@ export default function Home() {
           </div>
 
           <div className={styles.plans}>
-            {plans.map(({ name, price, period, rows }, index) => (
+            {plans.map(({ name, from, price, period, rows }, index) => (
               <article key={name} data-reveal className={styles.plan} data-featured={index === 0}>
                 <h3 className={styles.planName}>{name}</h3>
-                <p className={styles.planPrice}>{price}</p>
+                <p className={styles.planPrice}><PlanPrice from={from} price={price} /></p>
                 <p className={styles.planPeriod}>{period}</p>
                 <dl className={styles.planRows}>
                   {planRows.map((label, row) => (
