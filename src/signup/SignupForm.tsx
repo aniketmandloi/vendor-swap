@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState } from "react";
 import styles from "../app/landing.module.css";
 import { submitSignup } from "./actions";
@@ -104,6 +105,10 @@ export function SignupForm() {
       <button type="submit" className={styles.button} disabled={pending}>
         {pending ? "Joining…" : "Join the list"}
       </button>
+      <p>
+        We use your email only to contact you about the founding list.{" "}
+        <Link href="/privacy" className="underline underline-offset-2">Privacy policy</Link>.
+      </p>
       {state.status === "failed" && (
         <p role="alert" className={styles.fieldError}>We couldn&apos;t save your signup. Please try again.</p>
       )}

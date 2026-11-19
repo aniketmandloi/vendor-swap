@@ -14,9 +14,17 @@ test("home page shows the audit pitch and links to the embedded sample report", 
 
 test("home page signup section takes founding-practice signups", () => {
   const html = renderToStaticMarkup(<Home />);
-  const signup = html.slice(html.indexOf('id="signup"'));
+  const signup = html.slice(html.indexOf('id="signup"'), html.indexOf("<footer"));
 
   expect(signup).toContain('name="email"');
   expect(signup).toContain('name="role"');
   expect(signup).not.toContain("disabled");
+  expect(signup).toContain('href="/privacy"');
+});
+
+test("home page footer links to the privacy page", () => {
+  const html = renderToStaticMarkup(<Home />);
+  const footer = html.slice(html.indexOf("<footer"));
+
+  expect(footer).toContain('href="/privacy"');
 });
