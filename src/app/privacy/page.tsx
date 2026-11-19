@@ -4,7 +4,7 @@ import { contactEmail } from "../../contact";
 import styles from "../landing.module.css";
 
 export const metadata: Metadata = {
-  title: "Privacy | VendorSwap",
+  title: "Privacy",
   description:
     "What the VendorSwap founding-list form collects, why, where it is stored, and how to have it deleted.",
 };

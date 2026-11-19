@@ -4,7 +4,7 @@ import { sampleReport } from "@/report/sample";
 import { VerdictReport } from "@/report/VerdictReport";
 
 export const metadata: Metadata = {
-  title: "Sample Stack Verdict Report | VendorSwap",
+  title: "Sample Stack Verdict Report",
   description:
     "A sample Stack Verdict Report for a fictional solo dental practice.",
 };
