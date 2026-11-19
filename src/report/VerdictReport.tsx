@@ -13,13 +13,17 @@ import {
   type Totals,
 } from "./savings";
 
-const BUCKETS: readonly { kind: VerdictKind; title: string }[] = [
-  { kind: "replace_now", title: "Replace now" },
-  { kind: "replace_with_caveats", title: "Replace with caveats" },
-  { kind: "keep", title: "Keep" },
+export const BUCKETS: readonly { kind: VerdictKind; title: string; color: string }[] = [
+  { kind: "replace_now", title: "Replace now", color: "bg-[#dcebbd]" },
+  { kind: "replace_with_caveats", title: "Replace with caveats", color: "bg-[#f6e6b3]" },
+  { kind: "keep", title: "Keep", color: "bg-[#dde8e8]" },
 ];
 
-const FUNCTION_LABELS: Record<PracticeFunction, string> = {
+export const VERDICT_TITLES = Object.fromEntries(
+  BUCKETS.map(({ kind, title }) => [kind, title]),
+) as Record<VerdictKind, string>;
+
+export const FUNCTION_LABELS: Record<PracticeFunction, string> = {
   practice_management: "Practice management",
   patient_texting: "Patient texting",
   insurance_verification: "Insurance verification",
@@ -34,7 +38,7 @@ const usd = new Intl.NumberFormat("en-US", {
   currency: "USD",
 });
 
-function money(amount: Cents): string {
+export function money(amount: Cents): string {
   return usd.format(amount / 100);
 }
 
@@ -100,7 +104,7 @@ function VerdictRows({ verdict }: { verdict: VendorLine["verdict"] }) {
   }
 }
 
-function ComplianceNote({ line }: { line: VendorLine }) {
+export function ComplianceNote({ line }: { line: VendorLine }) {
   const { touchesPhi, confirmBeforeCancelling } = line.compliance;
   return (
     <>
@@ -111,16 +115,17 @@ function ComplianceNote({ line }: { line: VendorLine }) {
   );
 }
 
-function LineItem({ line }: { line: VendorLine }) {
+function LineItem({ line, embedded }: { line: VendorLine; embedded: boolean }) {
+  const VendorTitle = embedded ? "h5" : "h3";
   return (
     <li className="break-inside-avoid border-t border-foreground/15 py-3 print:py-1.5">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-        <h3 className="flex flex-wrap items-baseline gap-x-2 font-semibold">
+        <VendorTitle className="flex flex-wrap items-baseline gap-x-2 font-semibold">
           {line.vendor}
           <span className={`text-sm font-normal ${muted}`}>
             {FUNCTION_LABELS[line.function]}
           </span>
-        </h3>
+        </VendorTitle>
         <dl className="flex flex-wrap gap-x-4 text-sm">
           <div className="flex gap-2">
             <dt className={muted}>Current annual cost</dt>
@@ -144,14 +149,22 @@ function LineItem({ line }: { line: VendorLine }) {
   );
 }
 
-export function VerdictReport({ report }: { report: StackVerdictReport }) {
+export function VerdictReport({
+  report,
+  embedded = false,
+}: {
+  report: StackVerdictReport;
+  embedded?: boolean;
+}) {
+  const Title = embedded ? "h3" : "h1";
+  const BucketTitle = embedded ? "h4" : "h2";
   const totals = reportTotals(report);
   return (
-    <article className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-8 print:max-w-none print:p-0">
+    <article className="mx-auto w-full max-w-5xl rounded-2xl border border-[var(--rule)] bg-[var(--paper)] px-5 py-7 sm:px-10 sm:py-10 print:max-w-none print:rounded-none print:border-0 print:bg-white print:p-0">
       <header className="border-b border-foreground/15 pb-4 print:pb-2">
-        <h1 className="text-2xl font-semibold tracking-tight">
+        <Title className="font-serif text-3xl tracking-tight sm:text-5xl print:text-2xl print:font-semibold">
           Stack Verdict Report
-        </h1>
+        </Title>
         <p className="text-lg">{report.practiceName}</p>
         <p className={`text-sm ${muted}`}>
           Prepared on{" "}
@@ -163,16 +176,16 @@ export function VerdictReport({ report }: { report: StackVerdictReport }) {
           <TotalsList totals={totals.overall} />
         </div>
       </header>
-      {BUCKETS.map(({ kind, title }) => {
+      {BUCKETS.map(({ kind, title, color }) => {
         const lines = report.lines.filter((line) => line.verdict.kind === kind);
         if (lines.length === 0) return null;
         return (
           <section key={kind} className="mt-6 print:mt-3">
-            <h2 className="text-lg font-semibold">{title}</h2>
+            <BucketTitle className={`mb-2 inline-block rounded-full px-3 py-1 text-sm font-semibold print:mb-0 print:bg-transparent print:p-0 print:text-lg ${color}`}>{title}</BucketTitle>
             <TotalsList totals={totals.byBucket[kind]} />
             <ul className="mt-2">
               {lines.map((line, index) => (
-                <LineItem key={index} line={line} />
+                <LineItem key={index} line={line} embedded={embedded} />
               ))}
             </ul>
           </section>
