@@ -13,13 +13,17 @@ import {
   type Totals,
 } from "./savings";
 
-const BUCKETS: readonly { kind: VerdictKind; title: string; color: string }[] = [
+export const BUCKETS: readonly { kind: VerdictKind; title: string; color: string }[] = [
   { kind: "replace_now", title: "Replace now", color: "bg-[#dcebbd]" },
   { kind: "replace_with_caveats", title: "Replace with caveats", color: "bg-[#f6e6b3]" },
   { kind: "keep", title: "Keep", color: "bg-[#dde8e8]" },
 ];
 
-const FUNCTION_LABELS: Record<PracticeFunction, string> = {
+export const VERDICT_TITLES = Object.fromEntries(
+  BUCKETS.map(({ kind, title }) => [kind, title]),
+) as Record<VerdictKind, string>;
+
+export const FUNCTION_LABELS: Record<PracticeFunction, string> = {
   practice_management: "Practice management",
   patient_texting: "Patient texting",
   insurance_verification: "Insurance verification",
@@ -34,7 +38,7 @@ const usd = new Intl.NumberFormat("en-US", {
   currency: "USD",
 });
 
-function money(amount: Cents): string {
+export function money(amount: Cents): string {
   return usd.format(amount / 100);
 }
 
@@ -100,7 +104,7 @@ function VerdictRows({ verdict }: { verdict: VendorLine["verdict"] }) {
   }
 }
 
-function ComplianceNote({ line }: { line: VendorLine }) {
+export function ComplianceNote({ line }: { line: VendorLine }) {
   const { touchesPhi, confirmBeforeCancelling } = line.compliance;
   return (
     <>
