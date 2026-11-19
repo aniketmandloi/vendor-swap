@@ -1,7 +1,12 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
+import { sampleReport } from "../report/sample";
+import { reportTotals } from "../report/savings";
+import { FUNCTION_LABELS, VERDICT_TITLES, money } from "../report/VerdictReport";
 import styles from "./landing.module.css";
+
+const totals = reportTotals(sampleReport).overall;
 
 export function VerdictStack() {
   const stack = useRef<HTMLDivElement>(null);
@@ -48,10 +53,27 @@ export function VerdictStack() {
     <div ref={stack} className={styles.heroArt} aria-hidden="true">
       <div className={styles.stackBacking} />
       <div className={styles.stackSheet}>
-        <span className={styles.kicker}>Sample stack verdict</span>
-        <div className={styles.stackRow}><span>Patient texting</span><b>Replace now</b></div>
-        <div className={styles.stackRow}><span>Recall and reminders</span><b>Trial first</b></div>
-        <div className={styles.stackRow}><span>Practice management</span><b>Keep</b></div>
+        <div className={styles.sheetBar}>
+          <span>Stack Verdict Report</span>
+          <span>{sampleReport.practiceName}</span>
+        </div>
+        {sampleReport.lines.map((line, index) => (
+          <div
+            key={line.vendor}
+            className={styles.stackRow}
+            style={{ "--i": index } as CSSProperties}
+          >
+            <span>
+              {line.vendor}
+              <small>{FUNCTION_LABELS[line.function]}</small>
+            </span>
+            <b data-kind={line.verdict.kind}>{VERDICT_TITLES[line.verdict.kind]}</b>
+          </div>
+        ))}
+        <div className={styles.sheetTotal}>
+          <span>Net first-year savings</span>
+          <strong>{money(totals.netFirstYearSavings)}</strong>
+        </div>
       </div>
     </div>
   );
