@@ -238,6 +238,7 @@ export default function Home() {
             <li><a className={styles.link} href="#verdicts">Verdicts</a></li>
             <li><a className={styles.link} href="#pricing">Pricing</a></li>
             <li><a className={styles.link} href="#questions">Questions</a></li>
+            <li><Link className={styles.link} href="/privacy">Privacy</Link></li>
           </ul>
         </nav>
         <Link href="/" className={styles.tileWord}><span>VendorSwap</span></Link>
