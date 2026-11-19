@@ -553,7 +553,7 @@
 }
 
 .clause {
-  max-width: 11ch;
+  max-width: 14ch;
   font-size: var(--step-head);
   font-weight: 500;
   line-height: 1;
