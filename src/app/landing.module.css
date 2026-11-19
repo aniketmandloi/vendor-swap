@@ -1133,6 +1133,21 @@
   border: 1px solid color-mix(in srgb, var(--foreground) 50%, var(--paper));
   border-radius: var(--radius);
   background: var(--background);
+  color: var(--foreground);
+  caret-color: var(--ink);
+  transition: border-color 0.18s ease;
+}
+
+.signupField select {
+  padding-right: 2.5rem;
+  background: var(--background) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='%2317382c' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 0.85rem center / 16px;
+  appearance: none;
+  cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .signupField input:hover,
+  .signupField select:hover { border-color: var(--ink); }
 }
 
 .signupField [aria-invalid="true"] {
